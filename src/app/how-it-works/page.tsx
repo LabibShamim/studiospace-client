@@ -1,0 +1,3 @@
+import HowBookingWorks from "@/components/HowBookingWorks";
+import HostGuarantee from "@/components/HostGuarantee";
+export default function HowItWorksPage(){return <main className="bg-slate-50 dark:bg-zinc-950"><div className="mx-auto max-w-5xl px-4 pt-14 text-center"><p className="text-xs font-bold tracking-widest text-orange-500">SIMPLE BY DESIGN</p><h1 className="mt-3 text-4xl font-extrabold text-slate-900 dark:text-white">Make room for your next big idea.</h1><p className="mx-auto mt-4 max-w-2xl text-slate-500 dark:text-zinc-400">From discovery to production, StudioSpace makes booking creative workspaces simple.</p></div><HowBookingWorks/><HostGuarantee/></main>}

@@ -1,0 +1,2 @@
+import { Aperture } from "lucide-react";
+export default function Loading(){return <main className="grid min-h-[55vh] place-items-center bg-slate-50 dark:bg-zinc-950"><div className="flex flex-col items-center gap-4"><div className="grid size-16 animate-pulse place-items-center rounded-2xl bg-orange-500 text-white"><Aperture size={34}/></div><p className="text-sm font-semibold text-slate-500 dark:text-zinc-400">Preparing your creative space…</p></div></main>}
