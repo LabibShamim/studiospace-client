@@ -1,36 +1,44 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# StudioSpace
 
-## Getting Started
+**Live site:** https://your-studiospace.vercel.app (replace this with the deployed client URL)
 
-First, run the development server:
+StudioSpace is a peer-to-peer marketplace for creators to discover, list, and reserve photography studios, film stages, podcast lounges, music suites, and creative workshops.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Features
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- Discover and search creative studios with category filters, studio details, host information, amenities, and featured listings.
+- Register and sign in with Better Auth email/password or Google OAuth; passwords are validated for uppercase, lowercase, and minimum length.
+- Create, edit, and delete host-owned studio listings with image URL or ImgBB upload support.
+- Request studio bookings, prevent overlapping confirmed reservations, manage host confirmations, and cancel pending reservations.
+- Save favorite studios to a MongoDB wishlist and switch between persistent light and dark themes.
+- Responsive Next.js App Router interface with branded loading states, toast feedback, empty states, and a custom 404 page.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Tech stack
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Next.js App Router, React, TypeScript, Tailwind CSS, Lucide icons, Swiper.
+- Better Auth with MongoDB adapter and Google OAuth.
+- Express 5 REST API, MongoDB, signed JWTs in HTTPOnly cookies.
+- React Hot Toast for action feedback; ImgBB for image uploads.
 
-## Learn More
+## Local setup
 
-To learn more about Next.js, take a look at the following resources:
+1. Clone the client and server repositories into sibling folders.
+2. In `studiospace-server`, run `npm install`, copy `.env.example` to `.env`, and fill in MongoDB, Better Auth, JWT, and optional Google/ImgBB credentials.
+3. In `studiospace-client`, run `npm install`, copy `.env.example` to `.env.local`, and set `NEXT_PUBLIC_API_URL=http://localhost:5000`.
+4. Start the API with `npm run dev` in the server folder.
+5. Start Next.js with `npm run dev` in the client folder, then open http://localhost:3000.
+6. For the examiner account, set `EXAMINER_EMAIL` and `EXAMINER_PASSWORD` in the server `.env`, then run `npm run seed:examiner`. Default demo values: `examiner@studiospace.test` / `StudioSpace#2026`. Change the password before using a public production database.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Environment variables
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Server: `MONGODB_URL`, `MONGODB_DB`, `PORT`, `CLIENT_URL`, `BETTER_AUTH_URL`, `BETTER_AUTH_SECRET`, `JWT_SECRET`, optional `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`, `IMGBB_API_KEY`, `EXAMINER_EMAIL`, and `EXAMINER_PASSWORD`.
 
-## Deploy on Vercel
+Client: `NEXT_PUBLIC_API_URL`.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Deployment
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Deploy `studiospace-server` to Render (start command: `npm start`) and configure all server environment variables.
+- Deploy `studiospace-client` to Vercel and set `NEXT_PUBLIC_API_URL` to the deployed API origin.
+- Set `CLIENT_URL` on the API to the exact Vercel origin. Use HTTPS in production so the API can set the secure, cross-site HTTPOnly session token cookie.
+- Configure the Google OAuth redirect URI to the Better Auth callback URL for the deployed API.
+- Never commit `.env`, `.env.local`, API keys, database credentials, or production secrets.
