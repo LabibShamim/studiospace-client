@@ -1,44 +1,170 @@
 # StudioSpace
 
-**Live site:** https://your-studiospace.vercel.app (replace this with the deployed client URL)
+**Live Site:** https:
 
-StudioSpace is a peer-to-peer marketplace for creators to discover, list, and reserve photography studios, film stages, podcast lounges, music suites, and creative workshops.
+StudioSpace is a peer-to-peer marketplace for creators to discover, list, and reserve creative spaces, including photography studios, film stages, podcast lounges, music suites, and creative workshops.
 
 ## Features
 
-- Discover and search creative studios with category filters, studio details, host information, amenities, and featured listings.
-- Register and sign in with Better Auth email/password or Google OAuth; passwords are validated for uppercase, lowercase, and minimum length.
-- Create, edit, and delete host-owned studio listings with image URL or ImgBB upload support.
-- Request studio bookings, prevent overlapping confirmed reservations, manage host confirmations, and cancel pending reservations.
-- Save favorite studios to a MongoDB wishlist and switch between persistent light and dark themes.
-- Responsive Next.js App Router interface with branded loading states, toast feedback, empty states, and a custom 404 page.
+- **Explore Studios:** Discover and search creative spaces with category filters, detailed descriptions, host information, amenities, and featured listings.
+- **User Authentication:** Register and sign in using Better Auth with email/password or Google OAuth.
+- **Studio Management:** Create, edit, and delete your own studio listings with image URL or ImgBB image upload support.
+- **Booking System:** Request studio reservations, manage booking requests, confirm reservations as a host, and cancel pending bookings.
+- **Booking Conflict Prevention:** Prevent overlapping confirmed reservations for the same studio.
+- **Wishlist:** Save favorite studios to a MongoDB-powered wishlist.
+- **Dark & Light Mode:** Switch between persistent light and dark themes.
+- **Responsive Design:** Fully responsive interface for desktop, tablet, and mobile devices.
+- **User Experience:** Custom loading states, toast notifications, empty states, and a custom 404 page.
 
-## Tech stack
+## Tech Stack
 
-- Next.js App Router, React, TypeScript, Tailwind CSS, Lucide icons, Swiper.
-- Better Auth with MongoDB adapter and Google OAuth.
-- Express 5 REST API, MongoDB, signed JWTs in HTTPOnly cookies.
-- React Hot Toast for action feedback; ImgBB for image uploads.
+**Frontend:**
+- Next.js App Router
+- React
+- TypeScript
+- Tailwind CSS
+- Lucide React Icons
+- Swiper
 
-## Local setup
+**Backend & Database:**
+- Node.js
+- Express.js 5
+- MongoDB
+- Better Auth
+- JSON Web Token (JWT)
+- HTTPOnly Cookie Authentication
 
-1. Clone the client and server repositories into sibling folders.
-2. In `studiospace-server`, run `npm install`, copy `.env.example` to `.env`, and fill in MongoDB, Better Auth, JWT, and optional Google/ImgBB credentials.
-3. In `studiospace-client`, run `npm install`, copy `.env.example` to `.env.local`, and set `NEXT_PUBLIC_API_URL=http://localhost:5000`.
-4. Start the API with `npm run dev` in the server folder.
-5. Start Next.js with `npm run dev` in the client folder, then open http://localhost:3000.
-6. For the examiner account, set `EXAMINER_EMAIL` and `EXAMINER_PASSWORD` in the server `.env`, then run `npm run seed:examiner`. Default demo values: `examiner@studiospace.test` / `StudioSpace#2026`. Change the password before using a public production database.
+**Additional Tools:**
+- React Hot Toast
+- ImgBB API
+- Google OAuth
 
-## Environment variables
+## Local Installation & Setup
 
-Server: `MONGODB_URL`, `MONGODB_DB`, `PORT`, `CLIENT_URL`, `BETTER_AUTH_URL`, `BETTER_AUTH_SECRET`, `JWT_SECRET`, optional `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`, `IMGBB_API_KEY`, `EXAMINER_EMAIL`, and `EXAMINER_PASSWORD`.
+### Prerequisites
 
-Client: `NEXT_PUBLIC_API_URL`.
+- Node.js installed
+- MongoDB database
+- Git
+
+### 1. Clone the Repositories
+
+Clone both client and server repositories into sibling folders.
+
+```bash
+git clone YOUR_CLIENT_GITHUB_REPOSITORY_URL studiospace-client
+git clone YOUR_SERVER_GITHUB_REPOSITORY_URL studiospace-server
+```
+
+### 2. Setup Backend
+
+Navigate to the server folder:
+
+```bash
+cd studiospace-server
+npm install
+```
+
+Create a `.env` file from `.env.example` and configure your environment variables.
+
+```env
+PORT=5000
+MONGODB_URL=your_mongodb_connection_string
+MONGODB_DB=studiospace
+CLIENT_URL=http://localhost:3000
+BETTER_AUTH_URL=http://localhost:5000
+BETTER_AUTH_SECRET=your_better_auth_secret
+JWT_SECRET=your_jwt_secret
+GOOGLE_CLIENT_ID=your_google_client_id
+GOOGLE_CLIENT_SECRET=your_google_client_secret
+IMGBB_API_KEY=your_imgbb_api_key
+EXAMINER_EMAIL=examiner@studiospace.test
+EXAMINER_PASSWORD=your_examiner_password
+```
+
+Start the backend development server:
+
+```bash
+npm run dev
+```
+
+### 3. Setup Frontend
+
+Open another terminal and navigate to the client folder:
+
+```bash
+cd studiospace-client
+npm install
+```
+
+Create a `.env.local` file:
+
+```env
+NEXT_PUBLIC_API_URL=http://localhost:5000
+```
+
+Start the Next.js development server:
+
+```bash
+npm run dev
+```
+
+Open your browser and visit:
+
+http://localhost:3000
+
+### 4. Examiner Test Credentials
+
+To create the examiner account, configure `EXAMINER_EMAIL` and `EXAMINER_PASSWORD` in the server `.env` file and run:
+
+```bash
+npm run seed:examiner
+```
+
+**Demo Credentials:**
+
+| Field | Value |
+|---|---|
+| Email | `examiner@studiospace.test` |
+| Password | `StudioSpace#2026` |
+
+**Note:** Change the example password before using a public production database.
+
+## Environment Variables
+
+**Server:**
+- `MONGODB_URL`
+- `MONGODB_DB`
+- `PORT`
+- `CLIENT_URL`
+- `BETTER_AUTH_URL`
+- `BETTER_AUTH_SECRET`
+- `JWT_SECRET`
+- `GOOGLE_CLIENT_ID`
+- `GOOGLE_CLIENT_SECRET`
+- `IMGBB_API_KEY`
+- `EXAMINER_EMAIL`
+- `EXAMINER_PASSWORD`
+
+**Client:**
+- `NEXT_PUBLIC_API_URL`
 
 ## Deployment
 
-- Deploy `studiospace-server` to Render (start command: `npm start`) and configure all server environment variables.
-- Deploy `studiospace-client` to Vercel and set `NEXT_PUBLIC_API_URL` to the deployed API origin.
-- Set `CLIENT_URL` on the API to the exact Vercel origin. Use HTTPS in production so the API can set the secure, cross-site HTTPOnly session token cookie.
-- Configure the Google OAuth redirect URI to the Better Auth callback URL for the deployed API.
-- Never commit `.env`, `.env.local`, API keys, database credentials, or production secrets.
+- **Backend:** Deployed on Render using `npm start`.
+- **Frontend:** Deployed on Vercel.
+- Configure all required environment variables on the respective deployment platforms.
+- Set the server's `CLIENT_URL` to the exact deployed Vercel origin.
+- Set the client's `NEXT_PUBLIC_API_URL` to the deployed backend API URL.
+- Configure the Google OAuth redirect URI for the deployed Better Auth server.
+- Use HTTPS in production for secure HTTPOnly session cookies.
+
+## Security
+
+- Never commit `.env` or `.env.local` files.
+- Never expose MongoDB credentials, API keys, or authentication secrets.
+- Use strong production secrets and secure cookie settings.
+
+## Author
+
+Developed as part of the StudioSpace project.
