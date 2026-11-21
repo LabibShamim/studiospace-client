@@ -77,7 +77,7 @@ export default function Footer() {
               <li><Link href="/studios" className="transition hover:text-orange-500">Explore Studios</Link></li>
               <li><Link href="/add-studio" className="transition hover:text-orange-500">Become a Host</Link></li>
               <li><Link href="/about" className="transition hover:text-orange-500">About Us</Link></li>
-              <li><Link href="/contact" className="transition hover:text-orange-500">Contact Us</Link></li>
+              <li><Link href="/" className="transition hover:text-orange-500">Contact Us</Link></li>
             </ul>
           </div>
 

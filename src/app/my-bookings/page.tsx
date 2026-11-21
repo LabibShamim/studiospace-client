@@ -41,6 +41,7 @@ export default function MyBookingsPage() {
       setLoading(false);
     }
   }
+  
   useEffect(() => {
     if (session?.user) load();
     else if (!isPending) setLoading(false);
